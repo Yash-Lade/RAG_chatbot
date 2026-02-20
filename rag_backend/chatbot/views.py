@@ -9,11 +9,12 @@ def home(request):
     return render(request, "index.html")
 
 def ask_question(request):
-    if request.method == "POST":
-        body = json.loads(request.body)
-        query = body.get("question")
+    # if request.method == "POST":
+    #     body = json.loads(request.body)
+    #     query = body.get("question")
 
-        contexts = retrieve_chunks(query)
-        answer = generate_answer(query, contexts)
+    #     contexts = retrieve_chunks(query)
+    #     answer = generate_answer(query, contexts)
 
-        return JsonResponse({"answer": answer})
+    #     return JsonResponse({"answer": answer})
+    return JsonResponse({"answer": "Server running"})
