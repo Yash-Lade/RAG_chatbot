@@ -1,4 +1,4 @@
-# ✈️ A320 Maintenance RAG Chatbot
+# ✈️ A320 AI Assistant RAG Chatbot
 
 A Retrieval-Augmented Generation (RAG) based AI chatbot built using **Django**, **Pinecone**, **HuggingFace Embeddings**, and **Groq LLM**.  
 
