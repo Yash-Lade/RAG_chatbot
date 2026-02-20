@@ -1,0 +1,57 @@
+{% csrf_token %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A320 RAG Assistant</title>
+    <style>
+        body { font-family: Arial; padding: 40px; }
+        input { width: 60%; padding: 8px; }
+        button { padding: 8px 12px; }
+        #response { margin-top: 20px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+<h2>A320 Maintenance Assistant</h2>
+
+<input type="text" id="question" placeholder="Ask about A320...">
+<button onclick="ask()">Ask</button>
+
+<div id="response"></div>
+
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+async function ask() {
+    const question = document.getElementById("question").value;
+    const csrftoken = getCookie("csrftoken");
+
+    const response = await fetch("/ask/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken
+        },
+        body: JSON.stringify({ question })
+    });
+
+    const data = await response.json();
+    document.getElementById("response").innerText = data.answer;
+}
+</script>
+
+</body>
+</html>
