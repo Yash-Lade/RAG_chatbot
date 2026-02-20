@@ -68,7 +68,7 @@ Return Answer                           Context-Grounded Answer
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Yash-Lade/RAG_chatbot
 cd rag_backend
 ```
 ### 2️⃣ Create Virtual Environment
