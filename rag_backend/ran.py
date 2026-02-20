@@ -1,14 +1,10 @@
-import requests
+from groq import Groq
 import os
+from dotenv import load_dotenv
 
-api_key = os.getenv("GROQ_API_KEY")
-url = "https://api.groq.com/openai/v1/models"
+load_dotenv()
 
-headers = {
-    "Authorization": f"Bearer {api_key}",
-    "Content-Type": "application/json"
-}
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-response = requests.get(url, headers=headers)
-
-print(response.json())
+models = client.models.list()
+print(models)
