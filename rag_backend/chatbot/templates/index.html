@@ -1,23 +1,23 @@
-{% csrf_token %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>A320 RAG Assistant</title>
-    <style>
-        body { font-family: Arial; padding: 40px; }
-        input { width: 60%; padding: 8px; }
-        button { padding: 8px 12px; }
-        #response { margin-top: 20px; white-space: pre-wrap; }
-    </style>
+    <title>A320 AI Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<h2>A320 Maintenance Assistant</h2>
+<div class="background"></div>
 
-<input type="text" id="question" placeholder="Ask about A320...">
-<button onclick="ask()">Ask</button>
+<div class="container">
+    <h1>A320 Maintenance AI</h1>
 
-<div id="response"></div>
+    <div class="chat-box" id="chatBox"></div>
+
+    <div class="input-area">
+        <input type="text" id="question" placeholder="Ask about A320..." />
+        <button onclick="ask()">Send</button>
+    </div>
+</div>
 
 <script>
 function getCookie(name) {
@@ -36,7 +36,18 @@ function getCookie(name) {
 }
 
 async function ask() {
-    const question = document.getElementById("question").value;
+    const questionInput = document.getElementById("question");
+    const question = questionInput.value;
+    const chatBox = document.getElementById("chatBox");
+
+    if (!question.trim()) return;
+
+    chatBox.innerHTML += `<div class="user-msg">${question}</div>`;
+    questionInput.value = "";
+
+    chatBox.innerHTML += `<div class="bot-msg loading">Thinking...</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+
     const csrftoken = getCookie("csrftoken");
 
     const response = await fetch("/ask/", {
@@ -49,7 +60,10 @@ async function ask() {
     });
 
     const data = await response.json();
-    document.getElementById("response").innerText = data.answer;
+
+    document.querySelector(".loading").remove();
+    chatBox.innerHTML += `<div class="bot-msg">${data.answer}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 </script>
 
