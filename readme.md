@@ -4,8 +4,6 @@ A Retrieval-Augmented Generation (RAG) based AI chatbot built using **Django**, 
 
 This system allows users to query a technical PDF document (A320 Aircraft Characteristics – Airport & Maintenance Planning) and receive context-grounded answers.
 
----
-
 ## 🚀 Features
 
 - 📄 PDF-based knowledge system
@@ -47,8 +45,6 @@ Return Answer                           Context-Grounded Answer
    - Most relevant chunk is retrieved.
    - Retrieved context is sent to Groq LLM.
    - LLM generates answer strictly from context.
-
----
 
 ## 🛠️ Tech Stack
 
@@ -155,8 +151,8 @@ Similarity: Cosine
 LLM Model
 ```
 llama-3.1-8b-instant
-Retrieval Strategy
 ```
+Retrieval Strategy
 Top K = 1
 
 Context limited to 1200 characters
